@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion'
+import { animate, motion, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import Reveal from './Reveal'
 import SectionTitle from './SectionTitle'
@@ -20,7 +20,6 @@ interface StatsSectionProps {
 const AnimatedCounter = ({ value, suffix = '' }: { value: number; suffix?: string }) => {
   const motionValue = useMotionValue(0)
   const [displayValue, setDisplayValue] = useState(0)
-  const rounded = useTransform(motionValue, (latest) => Math.round(latest))
 
   useEffect(() => {
     const controls = animate(motionValue, value, {

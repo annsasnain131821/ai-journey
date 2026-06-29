@@ -5,7 +5,7 @@ import { ImSpinner9 } from 'react-icons/im'
 type Variant = 'primary' | 'secondary' | 'outline'
 type Size = 'sm' | 'md'
 
-interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'href'> {
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'href' | 'onDrag' | 'onDragStart' | 'onDragEnd'> {
   variant?: Variant
   size?: Size
   loading?: boolean
@@ -49,21 +49,20 @@ const Button = ({
 
   if (href) {
     return (
-      <motion.a
-        href={href}
-        className={baseClasses}
-        whileHover={{ y: -3, scale: 1.01 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        {content}
-      </motion.a>
+      <motion.div whileHover={{ y: -3, scale: 1.01 }} whileTap={{ scale: 0.98 }}>
+        <a href={href} className={baseClasses}>
+          {content}
+        </a>
+      </motion.div>
     )
   }
 
   return (
-    <motion.button className={baseClasses} disabled={loading || props.disabled} whileHover={{ y: -3, scale: 1.01 }} whileTap={{ scale: 0.98 }} {...props}>
-      {content}
-    </motion.button>
+    <motion.div whileHover={{ y: -3, scale: 1.01 }} whileTap={{ scale: 0.98 }}>
+      <button className={baseClasses} disabled={loading || props.disabled} {...props}>
+        {content}
+      </button>
+    </motion.div>
   )
 }
 
