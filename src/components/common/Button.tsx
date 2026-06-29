@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { ImSpinner9 } from 'react-icons/im'
 
@@ -48,16 +49,21 @@ const Button = ({
 
   if (href) {
     return (
-      <a href={href} className={baseClasses}>
+      <motion.a
+        href={href}
+        className={baseClasses}
+        whileHover={{ y: -3, scale: 1.01 }}
+        whileTap={{ scale: 0.98 }}
+      >
         {content}
-      </a>
+      </motion.a>
     )
   }
 
   return (
-    <button className={baseClasses} disabled={loading || props.disabled} {...props}>
+    <motion.button className={baseClasses} disabled={loading || props.disabled} whileHover={{ y: -3, scale: 1.01 }} whileTap={{ scale: 0.98 }} {...props}>
       {content}
-    </button>
+    </motion.button>
   )
 }
 

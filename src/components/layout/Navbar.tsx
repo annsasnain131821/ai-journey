@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { HiBars3 } from 'react-icons/hi2'
 import MobileMenu from './MobileMenu'
 import { NAV_ITEMS } from '../../constants/nav'
@@ -38,7 +39,10 @@ const Navbar = () => {
   }, [])
 
   return (
-    <header
+    <motion.header
+      initial={{ opacity: 0, y: -18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.1, ease: [0.22, 1, 0.36, 1] }}
       className={`sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-3xl transition-all duration-500 ${
         scrolled ? 'shadow-[0_24px_120px_-48px_rgba(15,23,42,0.7)]' : 'shadow-none'
       }`}
@@ -50,10 +54,11 @@ const Navbar = () => {
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_ITEMS.map((item) => (
-            <a
+            <motion.a
               key={item.label}
               href={item.href}
               onClick={() => setActiveLink(item.label)}
+              whileHover={{ y: -2, scale: 1.02 }}
               className="relative text-sm font-medium text-slate-400 transition hover:text-white"
             >
               <span className={activeLink === item.label ? 'text-white' : ''}>{item.label}</span>
@@ -62,7 +67,7 @@ const Navbar = () => {
                   activeLink === item.label ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
                 }`}
               />
-            </a>
+            </motion.a>
           ))}
         </nav>
 
@@ -89,7 +94,7 @@ const Navbar = () => {
         onClose={() => setMenuOpen(false)}
         onSelect={(label) => setActiveLink(label)}
       />
-    </header>
+    </motion.header>
   )
 }
 
